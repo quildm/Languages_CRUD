@@ -16,3 +16,17 @@
     <input type="submit" value="Submit"/>
 </form:form>
 <!-- ... -->
+
+<form action="/languages/new" method="POST" modelAttribute="language">
+  Name:<br>
+  <input type="text" name="name">
+  <br>
+  Creator:<br>
+  <input type="text" name="creator">
+  <br>
+  Version:<br>
+  <input type="text" name="version">
+  <br>
+  <br>
+  <input type="submit" value="Submit">
+</form> 

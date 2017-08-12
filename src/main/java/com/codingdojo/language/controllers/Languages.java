@@ -27,7 +27,7 @@ public class Languages {
 	
 	
 	@RequestMapping("/languages")
-    public String languages(Model model) {
+    public String languages(Model model, @Valid @ModelAttribute("language") Language language, BindingResult result) {
     	List<Language> languages = languageService.allLanguages();
         model.addAttribute("languages", languages);
         return "language.jsp";
@@ -46,9 +46,12 @@ public class Languages {
 	    }
 	 
 	  @PostMapping("/languages/new")
-	    public String createLanguage(@Valid @ModelAttribute("language") Language language, BindingResult result) {
+	    public String createLanguage(Model model, @Valid @ModelAttribute("language") Language language, BindingResult result) {
 	        if (result.hasErrors()) {
-	            return "newLanguage.jsp";
+	        	List<Language> languages = languageService.allLanguages();
+	            model.addAttribute("languages", languages);
+	        	 return "language.jsp";
+//	            return "newLanguage.jsp";
 	        }else{
 	            languageService.addLanguage(language);
 	            return "redirect:/languages";
