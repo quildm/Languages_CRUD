@@ -5,7 +5,7 @@
 <p>Languages</p>
 <table class="table">
 <c:forEach items="${languages}" var="language" varStatus="loop">
-	<tr>    
+	<tr>
 		<td>Name: <c:out value="${language.name}"/></td>
 		<td>creator: <c:out value="${language.creator}"/></td>
 		<td>current ver: <c:out value="${language.currentVersion}"/></td>
@@ -17,6 +17,7 @@
 
 
 <form:form method="POST" action="/languages/new" modelAttribute="language">
+
     <form:label path="name">Name
     <form:errors path="name"/>
     <form:input path="name"/></form:label><br>

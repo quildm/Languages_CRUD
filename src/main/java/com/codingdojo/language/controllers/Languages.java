@@ -23,9 +23,8 @@ public class Languages {
    public Languages(LanguageService languageService) {
 		this.languageService = languageService;
 	}
-	
-	
-	
+   
+
 	@RequestMapping("/languages")
     public String languages(Model model, @Valid @ModelAttribute("language") Language language, BindingResult result) {
     	List<Language> languages = languageService.allLanguages();
@@ -35,8 +34,7 @@ public class Languages {
 	
 	 @RequestMapping("/languages/{index}")
 	    public String findLanguageByIndex(Model model, @PathVariable("index") int index) {
-		 Language language = languageService.findLanguageByIndex(index);
-	        model.addAttribute("language", language);
+		 model.addAttribute("language", languageService.findLanguageByIndex(index));
 	        return "showLanguage.jsp";
 	    }
 	 
@@ -80,7 +78,7 @@ public class Languages {
 	    }
 	  
 	  @RequestMapping(value="/languages/delete/{id}")
-	    public String destroyLanguages(@PathVariable("id") int id) {
+	    public String destroyLanguages(@PathVariable("id") Long id) {
 	        languageService.destroyLanguage(id);
 	        return "redirect:/languages";
 	    }

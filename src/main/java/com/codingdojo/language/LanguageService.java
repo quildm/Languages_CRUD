@@ -5,13 +5,19 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
-
 import com.codingdojo.language.models.Language;
+import com.codingdojo.language.repositories.LanguageRepository;
+
+
 
 @Service
 public class LanguageService {
 	
+private LanguageRepository languageRepository;
 	
+    public LanguageService(LanguageRepository languageRepository){
+        this.languageRepository = languageRepository;
+    }
 
 	private List<Language> languages = new ArrayList<Language>(Arrays.asList(
 			new Language("Java", "James Gosling", "Java SE 8 Update 144"),
@@ -20,7 +26,7 @@ public class LanguageService {
 			));
 	
 	public List<Language> allLanguages() {
-		return languages;
+		return (List<Language>) languageRepository.findAll();
 	}
 
 	public Language findLanguageByIndex(int index) {
@@ -32,18 +38,14 @@ public class LanguageService {
 	}
 	
 	 public void addLanguage(Language language) {
-	        languages.add(language);
+	        languageRepository.save(language);
 	    }
 
 	public void updateLanguage(int id, Language language) {
-		 if (id < languages.size()){
-			 languages.set(id, language);
-	        }
+		languageRepository.save(language);
 		}
 
-	public void destroyLanguage(int id) {
-        if (id < languages.size()){
-            languages.remove(id);
-        }
+	public void destroyLanguage(Long id) {
+		languageRepository.delete(id);
     }
 }
